@@ -5,9 +5,9 @@ resource "kubernetes_secret" "cognito" {
   }
 
   data = {
-    client_id = base64encode(aws_cognito_user_pool_client.web_client.id)
-    user_pool_id = base64encode(aws_cognito_user_pool.main.id)
-    domain = base64encode(aws_cognito_user_pool_domain.app_client_domain.domain)
+    client_id = aws_cognito_user_pool_client.web_client.id
+    user_pool_id = aws_cognito_user_pool.main.id
+    domain = aws_cognito_user_pool_domain.app_client_domain.domain
   }
 
   type = "Opaque"
@@ -20,11 +20,11 @@ resource "kubernetes_secret" "db_credentials" {
   }
 
   data = {
-    db_user = base64encode(var.user)
-    db_password = base64encode(var.senha)
-    db_name = base64encode(var.NOME)
-    db_endpoint = base64encode("jdbc:postgresql://${aws_db_instance.snapcast-db.address}:5432/${var.NOME}")
-    db_kind = base64encode("postgresql")
+    db_user = var.user
+    db_password = var.senha
+    db_name = var.NOME
+    db_endpoint = "jdbc:postgresql://${aws_db_instance.snapcast-db.address}:5432/${var.NOME}"
+    db_kind = "postgresql"
   }
 
   type = "Opaque"
@@ -37,7 +37,7 @@ resource "kubernetes_secret" "bucket" {
   }
 
   data = {
-    name = base64encode(aws_s3_bucket.bucket_snapcast.bucket)
+    name = aws_s3_bucket.bucket_snapcast.bucket
   }
 
   type = "Opaque"

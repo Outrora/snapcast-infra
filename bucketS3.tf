@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket_snapcast" {
-  bucket = "${var.NOME}videos"  # Troque para um nome globalmente único
+  bucket = "${var.NOME}-videos"  # Troque para um nome globalmente único
 
 
   tags = {
