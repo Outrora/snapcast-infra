@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "eks-cluster" {
-  name     = "${var.NOME}-EKS"
+  name     = "${var.NOME}-eks"
   version  = "1.32"
   role_arn = data.aws_iam_role.labrole.arn
 
@@ -19,7 +19,7 @@ resource "aws_eks_cluster" "eks-cluster" {
 
 resource "kubernetes_namespace" "eks_namespace" {
   metadata {
-    name = "${var.NOME}-EKS"
+    name = "${var.NOME}-eks"
   }
 }
 
