@@ -47,7 +47,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
           AWS_EC2_METADATA_DISABLED: "true" 
-        run: terraform plan -var="senha=${{ secrets.DB_PASSWORD }}" -var="user=${{ secrets.DB_USER }} -var="principalArn=${{ secrets.PRINCIPAL_ARN }}"
+        run: terraform plan -var="senha=${{ secrets.DB_PASSWORD }}" -var="user=${{ secrets.DB_USER }}" -var="principalArn=${{ secrets.PRINCIPAL_ARN }}"
 
       - name: Aplicar o Terraform
         env:
