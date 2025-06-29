@@ -1,0 +1,111 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-central
+  labels:
+    app: app-central
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-central  
+  template:
+    metadata:
+      labels:
+        app: app-central
+    spec:
+      containers:
+        - name: app-central
+          image: mrpauloii/snapcast-central:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_KIND
+              value: "postgresql"
+              
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: db_name
+
+            - name: POSTGRES_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: db_endpoint
+
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: db_user
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: db_password
+
+            - name: KAFKA_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: kafka-config
+                  key: KAFKA_BROKER_URL
+
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: cognito
+                  key: client_id
+
+            - name: USER_POOL_ID
+              valueFrom:
+                secretKeyRef:
+                  name: cognito
+                  key: user_pool_id
+
+            - name: DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: cognito
+                  key: domain
+
+            - name: BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: bucket
+                  key: name
+
+  
+            - name: AWS_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: aws-region
+                  key: region
+
+            - name: EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: stmp-secret
+                  key: email
+
+            - name: HOST_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: stmp-secret
+                  key: host_email 
+
+            - name: SENHA_EMAIL
+              valueFrom:    
+                secretKeyRef:
+                  name: stmp-secret
+                  key: senha_email
+            
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

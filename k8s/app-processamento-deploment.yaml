@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-processamento
+  labels:
+    app: app-processamento
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-processamento
+  template:
+    metadata:
+      labels:
+        app: app-processamento
+    spec:
+      containers:
+        - name: app-processamento
+          image: mrpauloii/snapcast-processamento:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KAFKA_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: kafka-config
+                  key: KAFKA_BROKER_URL
+
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: cognito
+                  key: client_id
+
+            - name: USER_POOL_ID
+              valueFrom:
+                secretKeyRef:
+                  name: cognito
+                  key: user_pool_id
+
+            - name: DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: cognito
+                  key: domain
+
+            - name: BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: bucket
+                  key: name
+
+            - name: AWS_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: aws-region
+                  key: region           
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
