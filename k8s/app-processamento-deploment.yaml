@@ -55,10 +55,13 @@ spec:
 
             - name: AWS_REGION
               value: us-east-1
+
+            - name: TRACE
+              value: "http://tempo:4318"
           resources:
             requests:
               memory: "256Mi"
               cpu: "250m"
             limits:
-              memory: "512Mi"
-              cpu: "500m"
+              memory: "1000Mi"
+              cpu: "1000m"
