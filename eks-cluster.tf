@@ -17,6 +17,12 @@ resource "aws_eks_cluster" "eks-cluster" {
   }
 }
 
+resource "kubernetes_namespace" "eks_namespace" {
+  metadata {
+    name = "${var.NOME}-EKS"
+  }
+}
+
 resource "aws_iam_openid_connect_provider" "eks" {
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = ["9e99a48a9960b14926bb7f3b02e22da0ecd4e4e4"] # Confirme o thumbprint correto para sua região/cluster
@@ -45,7 +51,7 @@ resource "aws_iam_role" "irsa_role" {
 resource "kubernetes_service_account" "app_sa" {
   metadata {
     name      = "${var.NOME}-account" # Nome do Service Account
-    namespace = "default" # Namespace padrão do Kubernetes
+    namespace = kubernetes_namespace.eks_namespace.metadata[0].name
     annotations = {
       "eks.amazonaws.com/role-arn" = var.principalArn
     }
