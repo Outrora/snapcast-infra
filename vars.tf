@@ -22,8 +22,19 @@ variable "policyArn" {
   default = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
 }
 
-variable "NOME" {}
+variable "NOME" {
+  description = "Nome do Projeto"
+  type        = string
+  default     = "snapcast"
+}
 
-variable "TAGS" {}
+variable "TAGS" {
+  description = "Nome do Projeto"
+  type        = string
+  default     = "snapcast"
+}
+
+variable "senha" {}
+variable "user" {}
 
 

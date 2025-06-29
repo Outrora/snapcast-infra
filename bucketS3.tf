@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "bucket" {
+resource "aws_s3_bucket" "bucket_snapcast" {
   bucket = "${var.NOME}videos"  # Troque para um nome globalmente único
 
 
@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_s3_bucket_policy" "libera_para_principal" {
-  bucket = aws_s3_bucket.bucket.id
+  bucket = aws_s3_bucket.bucket_snapcast.id
 
   policy = jsonencode({
     Version = "2012-10-17",
