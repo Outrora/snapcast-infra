@@ -14,12 +14,14 @@ spec:
       labels:
         app: app-central
     spec:
-      serviceAccountName: snapcast-account
       containers:
         - name: app-central
           image: mrpauloii/snapcast-central:latest
           ports:
             - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: aws
           env:
             - name: DB_KIND
               value: "postgresql"
@@ -80,10 +82,7 @@ spec:
 
   
             - name: AWS_REGION
-              valueFrom:
-                secretKeyRef:
-                  name: aws-region
-                  key: region
+              value: "us-east-1"
 
             - name: EMAIL
               valueFrom:
@@ -102,6 +101,7 @@ spec:
                 secretKeyRef:
                   name: stmp-secret
                   key: senha_email
+          
             
           resources:
             requests:
