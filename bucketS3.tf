@@ -25,7 +25,7 @@ resource "aws_s3_bucket_policy" "libera_para_principal" {
           "s3:PutObject"
         ],
         Resource: [
-          "${aws_s3_bucket.bucket.arn}/*"
+          "${aws_s3_bucket.bucket_snapcast.arn}/*"
         ]
       }
     ]
