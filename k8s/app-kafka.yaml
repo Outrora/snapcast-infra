@@ -44,13 +44,13 @@ spec:
             - name: KAFKA_AUTO_CREATE_TOPICS_ENABLE
               value: "true"
             - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
-              value: 1
+              value: "1"
             - name: KAFKA_LOG_RETENTION_HOURS
-              value: 16
+              value: "16"
             - name: KAFKA_NUM_PARTITIONS
-              value: 6
+              value: "6"
             - name: KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS
-              value: 10
+              value: "0"
             - name: CLUSTER_ID
               value: "5Yr1SIgYQz-b-dgRabWx4g"
           volumeMounts:
