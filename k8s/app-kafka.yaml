@@ -48,7 +48,7 @@ spec:
             - name: KAFKA_LOG_RETENTION_HOURS
               value: 16
             - name: KAFKA_NUM_PARTITIONS
-              value: 4
+              value: 6
             - name: KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS
               value: 10
             - name: CLUSTER_ID
