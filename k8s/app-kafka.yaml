@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: kafka
-          image: confluentinc/cp-kafka:7.5.0
+          image: bitnami/kafka:4.0.0
           ports:
             - containerPort: 9092
             - containerPort: 9101
@@ -37,18 +37,20 @@ spec:
               value: CONTROLLER
             - name: KAFKA_INTER_BROKER_LISTENER_NAME
               value: PLAINTEXT
+            - name: KAFKA_CFG_CONTROLLER_LISTENER_NAMES
+              value: CONTROLLER
             - name: KAFKA_LOG_DIRS
               value: /tmp/kraft-combined-logs
             - name: KAFKA_AUTO_CREATE_TOPICS_ENABLE
               value: "true"
             - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
-              value: "1"
+              value: 1
             - name: KAFKA_LOG_RETENTION_HOURS
-              value: "168"
+              value: 16
             - name: KAFKA_NUM_PARTITIONS
-              value: "4"
+              value: 4
             - name: KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS
-              value: "0"
+              value: 10
             - name: CLUSTER_ID
               value: "5Yr1SIgYQz-b-dgRabWx4g"
           volumeMounts:
