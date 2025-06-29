@@ -14,12 +14,14 @@ spec:
       labels:
         app: app-processamento
     spec:
-      serviceAccountName: snapcast-account
       containers:
         - name: app-processamento
           image: mrpauloii/snapcast-processamento:latest
           ports:
             - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: aws
           env:
             - name: KAFKA_URL
               valueFrom:
@@ -52,10 +54,7 @@ spec:
                   key: name
 
             - name: AWS_REGION
-              valueFrom:
-                secretKeyRef:
-                  name: aws-region
-                  key: region           
+              value: us-east-1
           resources:
             requests:
               memory: "256Mi"

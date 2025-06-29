@@ -36,6 +36,15 @@ jobs:
             --name ${{ env.CLUSTER }} \
             --region ${{ env.AWS_REGION }}
 
+      - name: Create or Update Secret aws
+        run: |
+          kubectl create secret generic aws \
+            --from-literal=AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+            --from-literal=AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+            --from-literal=AWS_SESSION_TOKEN=${{ secrets.AWS_SESSION_TOKEN }} \
+            --namespace=default \
+            --dry-run=client -o yaml | kubectl apply -f -
+
       - name: Apply Deployment
         run: |
           kubectl apply -f k8s
