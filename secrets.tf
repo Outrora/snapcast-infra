@@ -1,7 +1,7 @@
 resource "kubernetes_secret" "cognito" {
   metadata {
     name      = "cognito"
-    namespace = "default"
+    namespace = kubernetes_namespace.eks_namespace.metadata[0].name
   }
 
   data = {
@@ -16,7 +16,7 @@ resource "kubernetes_secret" "cognito" {
 resource "kubernetes_secret" "db_credentials" {
   metadata {
     name      = "db-credentials"
-    namespace = "default"
+    namespace = kubernetes_namespace.eks_namespace.metadata[0].name
   }
 
   data = {
@@ -33,7 +33,7 @@ resource "kubernetes_secret" "db_credentials" {
 resource "kubernetes_secret" "bucket" {
   metadata {
     name      = "bucket"
-    namespace = "default"
+    namespace = kubernetes_namespace.eks_namespace.metadata[0].name
   }
 
   data = {
@@ -46,7 +46,7 @@ resource "kubernetes_secret" "bucket" {
 resource "kubernetes_secret" "aws_region_secret" {
   metadata {
     name      = "aws-region"
-    namespace = "default"
+    namespace = kubernetes_namespace.eks_namespace.metadata[0].name
   }
 
   data = {
