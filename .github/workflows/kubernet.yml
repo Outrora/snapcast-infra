@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  CLUSTER: ${{ secrets.NOMEPROJETO }}-EKS
+  CLUSTER: ${{ secrets.NOMEPROJETO }}-eks
 
 jobs:
   
