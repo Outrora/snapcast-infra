@@ -47,7 +47,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
           AWS_EC2_METADATA_DISABLED: "true" 
-        run: terraform plan -var="TAGS=${{ secrets.TAGS }}" -var="NOME=${{ secrets.NOMEPROJETO }}"
+        run: terraform plan -var="senha=${{ secrets.DB_PASSWORD }}" -var="user=${{ secrets.DB_USER }}"
 
       - name: Aplicar o Terraform
         env:
@@ -55,7 +55,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
           AWS_EC2_METADATA_DISABLED: "true" 
-        run: terraform apply -var="TAGS=${{ secrets.TAGS }}" -var="NOME=${{ secrets.NOMEPROJETO }}" -auto-approve
+        run: terraform apply -var="senha=${{ secrets.DB_PASSWORD }}" -var="user=${{ secrets.DB_USER }}" -auto-approve
 
    
       
