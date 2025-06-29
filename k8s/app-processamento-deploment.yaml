@@ -14,6 +14,7 @@ spec:
       labels:
         app: app-processamento
     spec:
+      serviceAccountName: snapcast-account
       containers:
         - name: app-processamento
           image: mrpauloii/snapcast-processamento:latest
