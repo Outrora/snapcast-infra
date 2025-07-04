@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+      evaluation_interval: 15s
+
+    rule_files:
+      # - "first_rules.yml"
+      # - "second_rules.yml"
+
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
+
+      - job_name: 'app-central'
+        static_configs:
+          - targets: ['app-service-central:80']
+        metrics_path: '/metrics'
+        scrape_interval: 30s
+
+      - job_name: 'app-upload'
+        static_configs:
+          - targets: ['app-service-upload:80']
+        metrics_path: '/metrics'
+        scrape_interval: 30s
+
+      - job_name: 'app-processamento'
+        static_configs:
+          - targets: ['app-processamento:8080']
+        metrics_path: '/metrics'
+        scrape_interval: 30s
+
+      - job_name: 'kafka'
+        static_configs:
+          - targets: ['kafka-service:9101']
+        metrics_path: '/metrics'
+        scrape_interval: 30s
+
+      - job_name: 'grafana'
+        static_configs:
+          - targets: ['grafana:3000']
+        metrics_path: '/metrics'
+        scrape_interval: 30s
