@@ -11,6 +11,8 @@ resource "kubernetes_secret" "cognito" {
   }
 
   type = "Opaque"
+
+  depends_on = [aws_eks_node_group.eks-node]
 }
 
 resource "kubernetes_secret" "db_credentials" {
@@ -28,6 +30,8 @@ resource "kubernetes_secret" "db_credentials" {
   }
 
   type = "Opaque"
+
+  depends_on = [aws_eks_node_group.eks-node]
 }
 
 resource "kubernetes_secret" "bucket" {
@@ -41,4 +45,6 @@ resource "kubernetes_secret" "bucket" {
   }
 
   type = "Opaque"
+
+  depends_on = [aws_eks_node_group.eks-node]
 }
