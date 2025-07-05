@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service-processamento
+  labels:
+    monitoring: enabled
+spec:
+  selector:
+    app: app-processamento
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP

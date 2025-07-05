@@ -36,14 +36,3 @@ spec:
             name: prometheus-config
         - name: prometheus-storage
           emptyDir: {}
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: prometheus
-spec:
-  selector:
-    app: prometheus
-  ports:
-    - port: 9090

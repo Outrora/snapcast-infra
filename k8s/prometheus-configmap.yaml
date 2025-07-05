@@ -20,19 +20,19 @@ data:
       - job_name: 'app-central'
         static_configs:
           - targets: ['app-service-central:80']
-        metrics_path: '/metrics'
+        metrics_path: '/q/metrics'
         scrape_interval: 30s
 
       - job_name: 'app-upload'
         static_configs:
           - targets: ['app-service-upload:80']
-        metrics_path: '/metrics'
+        metrics_path: '/q/metrics'
         scrape_interval: 30s
 
       - job_name: 'app-processamento'
         static_configs:
-          - targets: ['app-processamento:8080']
-        metrics_path: '/metrics'
+          - targets: ['app-service-processamento:80']
+        metrics_path: '/q/metrics'
         scrape_interval: 30s
 
       - job_name: 'kafka'
