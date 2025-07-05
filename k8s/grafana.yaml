@@ -23,8 +23,6 @@ spec:
               value: "admin"
             - name: GF_SECURITY_ADMIN_PASSWORD
               value: "admin"
-            - name: GF_INSTALL_PLUGINS
-              value: "grafana-tempo-datasource"
           volumeMounts:
             - name: grafana-datasources
               mountPath: /etc/grafana/provisioning/datasources
